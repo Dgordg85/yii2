@@ -18,6 +18,9 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+    const USERNAME_MAX_LENGTH = 128,
+        NAME_SURNAME_MAX_LENGTH = 45,
+        PASSWORD_SALT_ACCESSTOKEN_MAX_LENGTH = 255;
     /**
      * @inheritdoc
      */
@@ -34,9 +37,9 @@ class User extends \yii\db\ActiveRecord
         return [
             [['username', 'name', 'surname', 'password', 'salt'], 'required'],
             [['create_date'], 'safe'],
-            [['username'], 'string', 'max' => 128],
-            [['name', 'surname'], 'string', 'max' => 45],
-            [['password', 'salt', 'access_token'], 'string', 'max' => 255],
+            [['username'], 'string', 'max' => self::USERNAME_MAX_LENGTH],
+            [['name', 'surname'], 'string', 'max' => self::NAME_SURNAME_MAX_LENGTH],
+            [['password', 'salt', 'access_token'], 'string', 'max' => self::PASSWORD_SALT_ACCESSTOKEN_MAX_LENGTH],
             [['username'], 'unique'],
             [['access_token'], 'unique'],
         ];
@@ -50,12 +53,12 @@ class User extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'username' => Yii::t('app', 'Username'),
-            'name' => Yii::t('app', 'Name'),
-            'surname' => Yii::t('app', 'Surname'),
-            'password' => Yii::t('app', 'Password'),
-            'salt' => Yii::t('app', 'Salt'),
+            'name' => Yii::t('app', 'Имя'),
+            'surname' => Yii::t('app', 'Фамилия'),
+            'password' => Yii::t('app', 'Пароль'),
+            'salt' => Yii::t('app', 'Соль'),
             'access_token' => Yii::t('app', 'Access Token'),
-            'create_date' => Yii::t('app', 'Create Date'),
+            'create_date' => Yii::t('app', 'Дата создания'),
         ];
     }
 
